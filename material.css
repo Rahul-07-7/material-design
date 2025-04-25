@@ -791,6 +791,9 @@ h4 {
     max-width: 82%;
     left: 13%;
   }
+  .project-table {
+    bottom: -30%;
+  }
   .sign-up {
     max-width: 70%;
     left: 15%;
@@ -813,5 +816,22 @@ h4 {
   .sign-up {
     max-width: 80%;
     left: 9%;
+  }
+  .card {
+    margin-right: 20px !important;
+  }
+  .project,
+  .project-2 {
+    margin: 0 20px 0 0;
+  }
+  .hamb {
+    margin-right: 20px;
+  }
+  .table-t {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .alerts {
+    width: 95%;
   }
 }
