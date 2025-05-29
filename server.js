@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
-const User = require("./models/User");
+const User = require("./models/user");
 const app = express();
 const path = require("path");
 
@@ -13,8 +13,6 @@ mongoose.connect("mongodb://localhost:27017/userAuth", {
   useUnifiedTopology: true,
 });
 
-// Middleware
-app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
   session({
@@ -23,9 +21,11 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "MATERIAL-DESIGN", "signup.html"));
+  res.sendFile(path.join(__dirname, "signup.html"));
 });
+app.use(express.static(__dirname));
 
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
@@ -50,6 +50,20 @@ app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("signinn.html");
   });
+});
+app.get("/api/profile", async (req, res) => {
+  console.log("Session User ID:", req.session.userId); // 👈 check if it's set
+
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  const user = await User.findById(req.session.userId).select("name email");
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  res.json(user);
 });
 
 app.listen(5000, () => console.log("Server running on http://localhost:5000"));
