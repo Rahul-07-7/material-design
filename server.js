@@ -7,11 +7,7 @@ const User = require("./models/user");
 const app = express();
 const path = require("path");
 
-// Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/userAuth", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
