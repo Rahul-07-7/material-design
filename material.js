@@ -54,19 +54,19 @@ function hidetoast() {
   toast.style.display = "none";
 }
 
-fetch("/api/profile", {
-  credentials: "include", // 👈 needed to send session cookie
-})
-  .then((res) => {
-    if (!res.ok) throw new Error("Not logged in");
-    return res.json();
-  })
-  .then((data) => {
-    document.querySelector("h4").textContent = data.name;
-    document.querySelector("div.mt-5 span.text-muted").textContent = data.name;
-    document.querySelector("div.mt-1 span.text-muted").textContent = data.email;
-  })
-  .catch((err) => {
-    console.log("Error fetching profile:", err);
-    window.location.href = "signinn.html";
-  });
+// fetch("/api/profile", {
+//   credentials: "include", // 👈 needed to send session cookie
+// })
+//   .then((res) => {
+//     if (!res.ok) throw new Error("Not logged in");
+//     return res.json();
+//   })
+//   .then((data) => {
+//     document.querySelector("h4").textContent = data.name;
+//     document.querySelector("div.mt-5 span.text-muted").textContent = data.name;
+//     document.querySelector("div.mt-1 span.text-muted").textContent = data.email;
+//   })
+//   .catch((err) => {
+//     console.log("Error fetching profile:", err);
+//     window.location.href = "signinn.html";
+//   });
